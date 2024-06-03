@@ -1,0 +1,15 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "No preBuild step needed"
+    build:
+      commands:
+        - echo "No build step needed for static HTML"
+  artifacts:
+    baseDirectory: /frontend
+    files:
+      - '**/*'
+  cache:
+    paths: []

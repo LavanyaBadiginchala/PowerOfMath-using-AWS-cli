@@ -1,0 +1,29 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-powerofmathapp-dev-8c0d4-authRole",
+      "UnauthRoleArn": "arn:aws:iam::870114608584:role/amplify-powerofmathapp-dev-8c0d4-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::870114608584:role/amplify-powerofmathapp-dev-8c0d4-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-powerofmathapp-dev-8c0d4-deployment",
+      "UnauthRoleName": "amplify-powerofmathapp-dev-8c0d4-unauthRole",
+      "StackName": "amplify-powerofmathapp-dev-8c0d4",
+      "StackId": "arn:aws:cloudformation:us-east-2:870114608584:stack/amplify-powerofmathapp-dev-8c0d4/9cc0af00-216d-11ef-a155-06a6dfaa302f",
+      "AmplifyAppId": "d38oh7pjab8fb0"
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "providerPlugin": "awscloudformation",
+      "type": "manual",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-powerofmathapp-dev-8c0d4-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
+        "logicalId": "hostingamplifyhosting"
+      },
+      "lastPushTimeStamp": "2024-06-03T05:56:18.038Z",
+      "output": {},
+      "lastPushDirHash": "9SaWdpPpJW/Rhp2cEyHMic5ywZs="
+    }
+  }
+}

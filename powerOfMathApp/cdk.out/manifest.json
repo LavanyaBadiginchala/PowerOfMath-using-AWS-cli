@@ -1,0 +1,149 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "PowerOfMathAppStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "PowerOfMathAppStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "PowerOfMathAppStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "PowerOfMathAppStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e53b8f81c523173c8f4825ccfe566a06092c34eb45a9fc019d22c6beca290ddd.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "PowerOfMathAppStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "PowerOfMathAppStack.assets"
+      ],
+      "metadata": {
+        "/PowerOfMathAppStack/PowerOfMathTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathTable199B70CE"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathFunctionServiceRoleCF5E0024"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathFunctionServiceRoleDefaultPolicy51CE601C"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathFunctionCC3E6BF3"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathAPI/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathAPID13F0FD8"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathAPI/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathAPIDeployment6C37F7F0a85b8cd2ba00f3de9015d04970abfe0b"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathAPI/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathAPIDeploymentStageprod59BB3396"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathAPI/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathAPIEndpointDCE65BAD"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathAPIcalculate774F5C75"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/POST/ApiPermission.PowerOfMathAppStackPowerOfMathAPI884652C8.POST..calculate": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathAPIcalculatePOSTApiPermissionPowerOfMathAppStackPowerOfMathAPI884652C8POSTcalculateC3A8B348"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/POST/ApiPermission.Test.PowerOfMathAppStackPowerOfMathAPI884652C8.POST..calculate": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathAPIcalculatePOSTApiPermissionTestPowerOfMathAppStackPowerOfMathAPI884652C8POSTcalculate3FB9322D"
+          }
+        ],
+        "/PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PowerOfMathAPIcalculatePOST7896B6F6"
+          }
+        ],
+        "/PowerOfMathAppStack/APIUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "APIUrl"
+          }
+        ],
+        "/PowerOfMathAppStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/PowerOfMathAppStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/PowerOfMathAppStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/PowerOfMathAppStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "PowerOfMathAppStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

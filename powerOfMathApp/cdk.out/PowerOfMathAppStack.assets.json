@@ -1,0 +1,32 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "8e5d795b0548725db880ea3bf25f7a1877d02307457d44b58272188b32f84faa": {
+      "source": {
+        "path": "asset.8e5d795b0548725db880ea3bf25f7a1877d02307457d44b58272188b32f84faa",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "8e5d795b0548725db880ea3bf25f7a1877d02307457d44b58272188b32f84faa.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "e53b8f81c523173c8f4825ccfe566a06092c34eb45a9fc019d22c6beca290ddd": {
+      "source": {
+        "path": "PowerOfMathAppStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "e53b8f81c523173c8f4825ccfe566a06092c34eb45a9fc019d22c6beca290ddd.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

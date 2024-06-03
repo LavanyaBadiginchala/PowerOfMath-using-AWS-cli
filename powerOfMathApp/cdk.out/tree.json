@@ -1,0 +1,602 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "PowerOfMathAppStack": {
+        "id": "PowerOfMathAppStack",
+        "path": "PowerOfMathAppStack",
+        "children": {
+          "PowerOfMathTable": {
+            "id": "PowerOfMathTable",
+            "path": "PowerOfMathAppStack/PowerOfMathTable",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "PowerOfMathAppStack/PowerOfMathTable/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                  "aws:cdk:cloudformation:props": {
+                    "attributeDefinitions": [
+                      {
+                        "attributeName": "ID",
+                        "attributeType": "S"
+                      }
+                    ],
+                    "keySchema": [
+                      {
+                        "attributeName": "ID",
+                        "keyType": "HASH"
+                      }
+                    ],
+                    "provisionedThroughput": {
+                      "readCapacityUnits": 5,
+                      "writeCapacityUnits": 5
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                  "version": "2.144.0"
+                }
+              },
+              "ScalingRole": {
+                "id": "ScalingRole",
+                "path": "PowerOfMathAppStack/PowerOfMathTable/ScalingRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.144.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+              "version": "2.144.0"
+            }
+          },
+          "PowerOfMathFunction": {
+            "id": "PowerOfMathFunction",
+            "path": "PowerOfMathAppStack/PowerOfMathFunction",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "PowerOfMathAppStack/PowerOfMathFunction/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "PowerOfMathAppStack/PowerOfMathFunction/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.144.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PowerOfMathAppStack/PowerOfMathFunction/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.144.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "PowerOfMathAppStack/PowerOfMathFunction/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "PowerOfMathAppStack/PowerOfMathFunction/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "dynamodb:BatchGetItem",
+                                    "dynamodb:BatchWriteItem",
+                                    "dynamodb:ConditionCheckItem",
+                                    "dynamodb:DeleteItem",
+                                    "dynamodb:DescribeTable",
+                                    "dynamodb:GetItem",
+                                    "dynamodb:GetRecords",
+                                    "dynamodb:GetShardIterator",
+                                    "dynamodb:PutItem",
+                                    "dynamodb:Query",
+                                    "dynamodb:Scan",
+                                    "dynamodb:UpdateItem"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "PowerOfMathTable199B70CE",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Ref": "AWS::NoValue"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "PowerOfMathFunctionServiceRoleDefaultPolicy51CE601C",
+                            "roles": [
+                              {
+                                "Ref": "PowerOfMathFunctionServiceRoleCF5E0024"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.144.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.144.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.144.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "PowerOfMathAppStack/PowerOfMathFunction/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "PowerOfMathAppStack/PowerOfMathFunction/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.144.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "PowerOfMathAppStack/PowerOfMathFunction/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.144.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.144.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "PowerOfMathAppStack/PowerOfMathFunction/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "8e5d795b0548725db880ea3bf25f7a1877d02307457d44b58272188b32f84faa.zip"
+                    },
+                    "environment": {
+                      "variables": {
+                        "TABLE_NAME": {
+                          "Ref": "PowerOfMathTable199B70CE"
+                        }
+                      }
+                    },
+                    "handler": "lambda_function.lambda_handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "PowerOfMathFunctionServiceRoleCF5E0024",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.144.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.144.0"
+            }
+          },
+          "PowerOfMathAPI": {
+            "id": "PowerOfMathAPI",
+            "path": "PowerOfMathAppStack/PowerOfMathAPI",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "PowerOfMathAppStack/PowerOfMathAPI/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "This service calculates the power of a number.",
+                    "name": "Power Of Math Service"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                  "version": "2.144.0"
+                }
+              },
+              "Deployment": {
+                "id": "Deployment",
+                "path": "PowerOfMathAppStack/PowerOfMathAPI/Deployment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PowerOfMathAppStack/PowerOfMathAPI/Deployment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                      "aws:cdk:cloudformation:props": {
+                        "description": "This service calculates the power of a number.",
+                        "restApiId": {
+                          "Ref": "PowerOfMathAPID13F0FD8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                      "version": "2.144.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                  "version": "2.144.0"
+                }
+              },
+              "DeploymentStage.prod": {
+                "id": "DeploymentStage.prod",
+                "path": "PowerOfMathAppStack/PowerOfMathAPI/DeploymentStage.prod",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "PowerOfMathAppStack/PowerOfMathAPI/DeploymentStage.prod/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                      "aws:cdk:cloudformation:props": {
+                        "deploymentId": {
+                          "Ref": "PowerOfMathAPIDeployment6C37F7F0a85b8cd2ba00f3de9015d04970abfe0b"
+                        },
+                        "restApiId": {
+                          "Ref": "PowerOfMathAPID13F0FD8"
+                        },
+                        "stageName": "prod"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                      "version": "2.144.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                  "version": "2.144.0"
+                }
+              },
+              "Endpoint": {
+                "id": "Endpoint",
+                "path": "PowerOfMathAppStack/PowerOfMathAPI/Endpoint",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnOutput",
+                  "version": "2.144.0"
+                }
+              },
+              "Default": {
+                "id": "Default",
+                "path": "PowerOfMathAppStack/PowerOfMathAPI/Default",
+                "children": {
+                  "calculate": {
+                    "id": "calculate",
+                    "path": "PowerOfMathAppStack/PowerOfMathAPI/Default/calculate",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                          "aws:cdk:cloudformation:props": {
+                            "parentId": {
+                              "Fn::GetAtt": [
+                                "PowerOfMathAPID13F0FD8",
+                                "RootResourceId"
+                              ]
+                            },
+                            "pathPart": "calculate",
+                            "restApiId": {
+                              "Ref": "PowerOfMathAPID13F0FD8"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                          "version": "2.144.0"
+                        }
+                      },
+                      "POST": {
+                        "id": "POST",
+                        "path": "PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/POST",
+                        "children": {
+                          "ApiPermission.PowerOfMathAppStackPowerOfMathAPI884652C8.POST..calculate": {
+                            "id": "ApiPermission.PowerOfMathAppStackPowerOfMathAPI884652C8.POST..calculate",
+                            "path": "PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/POST/ApiPermission.PowerOfMathAppStackPowerOfMathAPI884652C8.POST..calculate",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "PowerOfMathFunctionCC3E6BF3",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "PowerOfMathAPID13F0FD8"
+                                      },
+                                      "/",
+                                      {
+                                        "Ref": "PowerOfMathAPIDeploymentStageprod59BB3396"
+                                      },
+                                      "/POST/calculate"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.144.0"
+                            }
+                          },
+                          "ApiPermission.Test.PowerOfMathAppStackPowerOfMathAPI884652C8.POST..calculate": {
+                            "id": "ApiPermission.Test.PowerOfMathAppStackPowerOfMathAPI884652C8.POST..calculate",
+                            "path": "PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/POST/ApiPermission.Test.PowerOfMathAppStackPowerOfMathAPI884652C8.POST..calculate",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "PowerOfMathFunctionCC3E6BF3",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "apigateway.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":execute-api:",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":",
+                                      {
+                                        "Ref": "PowerOfMathAPID13F0FD8"
+                                      },
+                                      "/test-invoke-stage/POST/calculate"
+                                    ]
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                              "version": "2.144.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "PowerOfMathAppStack/PowerOfMathAPI/Default/calculate/POST/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                              "aws:cdk:cloudformation:props": {
+                                "authorizationType": "NONE",
+                                "httpMethod": "POST",
+                                "integration": {
+                                  "type": "AWS_PROXY",
+                                  "uri": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":apigateway:",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        },
+                                        ":lambda:path/2015-03-31/functions/",
+                                        {
+                                          "Fn::GetAtt": [
+                                            "PowerOfMathFunctionCC3E6BF3",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/invocations"
+                                      ]
+                                    ]
+                                  },
+                                  "integrationHttpMethod": "POST"
+                                },
+                                "resourceId": {
+                                  "Ref": "PowerOfMathAPIcalculate774F5C75"
+                                },
+                                "restApiId": {
+                                  "Ref": "PowerOfMathAPID13F0FD8"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                              "version": "2.144.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                          "version": "2.144.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                      "version": "2.144.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                  "version": "2.144.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apigateway.RestApi",
+              "version": "2.144.0"
+            }
+          },
+          "APIUrl": {
+            "id": "APIUrl",
+            "path": "PowerOfMathAppStack/APIUrl",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.144.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "PowerOfMathAppStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "PowerOfMathAppStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.144.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "PowerOfMathAppStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.144.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "PowerOfMathAppStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.144.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "PowerOfMathAppStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.144.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.144.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.144.0"
+    }
+  }
+}
